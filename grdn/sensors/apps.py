@@ -1,6 +1,7 @@
 from django.apps import AppConfig
+from django.utils.translation import gettext_lazy as _
 
 
 class SensorsConfig(AppConfig):
     name = "grdn.sensors"
-    verbose_name = "Sensors Logging"
+    verbose_name = _("Sensors Logging")
