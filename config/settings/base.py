@@ -179,3 +179,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
+
+
+# PROJECT SETTINGS
+# ------------------------------------------------------------------------------
+MQTT_SERVER = env("MQTT_SERVER", default="test.mosquitto.org")
+MQTT_TOPIC = env("MQTT_TOPIC")
