@@ -55,7 +55,7 @@ EMAIL_BACKEND = env(
 )
 
 EMAIL_SUBJECT_PREFIX = env("DJANGO_EMAIL_SUBJECT_PREFIX", default="")
-SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default="postmaster@hugis.sk")
+SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default="postmaster@hugis.eu")
 DEFAULT_FROM_EMAIL = env(
     "DJANGO_DEFAULT_FROM_EMAIL", default="Grdn <{}>".format(SERVER_EMAIL)
 )
