@@ -22,4 +22,6 @@ class Command(BaseCommand):
         client.subscribe(f"{settings.MQTT_TOPIC}/+")
 
     def on_message(self, client, userdata, msg):
-        self.stdout.write(f"{msg.topic} {msg.payload}")
+        payload = float(msg.payload.decode("ascii"))
+
+        self.stdout.write(f"{msg.topic} {payload}")
