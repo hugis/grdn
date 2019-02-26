@@ -19,7 +19,7 @@ class Command(BaseCommand):
 
     def on_connect(self, client, userdata, flags, rc):
         self.stdout.write(f"Connected with result code {rc}")
-        client.subscribe(settings.MQTT_TOPIC)
+        client.subscribe(f"{settings.MQTT_TOPIC}/+")
 
     def on_message(self, client, userdata, msg):
         self.stdout.write(f"{msg.topic} {msg.payload}")
