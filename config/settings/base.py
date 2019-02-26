@@ -73,7 +73,7 @@ MANAGERS = ADMINS
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {"default": env.db("DATABASE_URL", default="postgres:///grdn")}
+DATABASES = {"default": env.db("DATABASE_URL", default="sqlite:///db.sqlite")}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 
