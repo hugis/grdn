@@ -1,6 +1,13 @@
+import re
+
 from django.conf import settings
 from django.core.management.base import BaseCommand
 import paho.mqtt.client as mqtt
+
+from ... import models
+
+
+topic_regex = re.compile(r"^" + re.escape(settings.MQTT_TOPIC) + r"/(\d+)$")
 
 
 class Command(BaseCommand):
@@ -23,5 +30,14 @@ class Command(BaseCommand):
 
     def on_message(self, client, userdata, msg):
         payload = float(msg.payload.decode("ascii"))
+        m = topic_regex.match(msg.topic)
+        if m:
+            sensor_id = m.group(1)
+            self.stdout.write(f"{sensor_id}: {payload}")
 
-        self.stdout.write(f"{msg.topic} {payload}")
+            try:
+                sensor = models.Sensor.objects.get(pk=sensor_id)
+            except models.Sensor.DoesNotExist:
+                pass
+            else:
+                models.Observation.objects.create(sensor=sensor, value=payload)
