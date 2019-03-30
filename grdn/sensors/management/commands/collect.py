@@ -25,15 +25,15 @@ class Command(BaseCommand):
         client.loop_forever()
 
     def on_connect(self, client, userdata, flags, rc):
-        self.stdout.write(f"Connected with result code {rc}")
-        client.subscribe(f"{settings.MQTT_TOPIC}/+")
+        self.stdout.write("Connected with result code {}".format(rc))
+        client.subscribe("{}/+".format(settings.MQTT_TOPIC))
 
     def on_message(self, client, userdata, msg):
         payload = float(msg.payload.decode("ascii"))
         m = topic_regex.match(msg.topic)
         if m:
             sensor_id = m.group(1)
-            self.stdout.write(f"{sensor_id}: {payload}")
+            self.stdout.write("{}: {}".format(sensor_id, payload))
 
             try:
                 sensor = models.Sensor.objects.get(pk=sensor_id)

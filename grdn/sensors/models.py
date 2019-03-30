@@ -47,4 +47,4 @@ class Observation(models.Model):
         verbose_name_plural = _("observations")
 
     def __str__(self):
-        return f"{self.sensor}: {self.value} {self.sensor.unit}"
+        return "{}: {} {}".format(self.sensor, self.value, self.sensor.unit)
